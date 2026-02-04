@@ -24,28 +24,29 @@ import {
   Bot,
   Heart,
   Fingerprint,
-  Compass
+  Compass,
+  Scale
 } from 'lucide-react';
 
 // --- UI Components ---
 
 const SectionHeader = ({ title, subtitle, label }: { title: string, subtitle?: string, label?: string }) => (
-  <div className="mb-4 md:mb-6 animate-up">
+  <div className="mb-3 md:mb-5 animate-up">
     {label && (
       <div className="flex items-center gap-2 mb-1">
         <span className="w-6 md:w-8 h-[2px] bg-gradient-to-r from-[#3b82f6] to-transparent"></span>
         <span className="text-[#3b82f6] text-[9px] md:text-xs font-bold tracking-[0.3em] uppercase">{label}</span>
       </div>
     )}
-    <h2 className="text-xl md:text-4xl font-black tracking-tight text-white mb-1 md:mb-2 leading-tight">
+    <h2 className="text-xl md:text-3xl font-black tracking-tight text-white mb-1 md:mb-2 leading-tight">
       {title}
     </h2>
-    {subtitle && <p className="text-gray-400 text-xs md:text-lg max-w-4xl font-light leading-relaxed">{subtitle}</p>}
+    {subtitle && <p className="text-gray-400 text-[10px] md:text-base max-w-4xl font-light leading-relaxed">{subtitle}</p>}
   </div>
 );
 
 const Card = ({ children, className = "", delay = "" }: { children?: React.ReactNode, className?: string, delay?: string }) => (
-  <div className={`glass-card p-3 md:p-5 animate-up opacity-0 ${delay} ${className}`}>
+  <div className={`glass-card p-3 md:p-4 animate-up opacity-0 ${delay} ${className}`}>
     {children}
   </div>
 );
@@ -450,12 +451,9 @@ const Page6 = () => (
         </Card>
 
         <Card delay="stagger-3">
-          <div className="flex justify-between items-start mb-3">
-             <div className="flex items-center gap-2">
-               <BrainCircuit className="text-[#8b5cf6]" size={20} />
-               <h4 className="text-sm md:text-lg font-bold text-white">AI人才价值盘点</h4>
-             </div>
-             <div className="text-[8px] text-gray-500 uppercase">量化评估</div>
+          <div className="flex items-center gap-2 mb-3">
+             <BrainCircuit className="text-[#8b5cf6]" size={20} />
+             <h4 className="text-sm md:text-lg font-bold text-white">AI人才价值盘点</h4>
           </div>
           <p className="text-[9px] md:text-xs text-gray-400 mb-3 leading-snug">整合绩效产出数据，识别冗余与高潜，支撑调配决策</p>
           <div className="p-2 bg-white/5 rounded-lg space-y-1 text-[9px] md:text-xs text-gray-500">
@@ -487,60 +485,89 @@ const Page7 = () => (
     <div className="max-w-6xl mx-auto w-full">
       <SectionHeader 
         title="【组织嵌入】深挖痛点，做决策伙伴" 
-        subtitle="打破部门墙，在业务决策早期预植入HR视角，前置识别风险"
+        subtitle="打破部门墙，在决策早期植入HR视角，优化资源配置效能"
         label="2026 STRATEGIC TASK 03" 
       />
       
-      <div className="glass-card p-3 md:p-6 mb-4 md:mb-6 flex justify-between items-center animate-up stagger-1 border-t-2 border-t-yellow-500">
-         <div className="flex items-center gap-3">
-           <Zap size={20} className="text-yellow-500" />
-           <h4 className="text-sm md:text-xl font-bold text-white uppercase tracking-widest">策略目标</h4>
+      <div className="glass-card p-2 md:p-5 mb-3 md:mb-5 flex justify-between items-center animate-up stagger-1 border-t-2 border-t-yellow-500">
+         <div className="flex items-center gap-2">
+           <Zap size={18} className="text-yellow-500" />
+           <h4 className="text-xs md:text-lg font-bold text-white uppercase tracking-widest">策略目标</h4>
          </div>
-         <div className="flex gap-6 md:gap-12">
+         <div className="flex gap-4 md:gap-10">
             <div className="text-center">
-               <div className="text-[8px] text-gray-500 uppercase">角色转变</div>
-               <div className="text-lg md:text-2xl font-black text-yellow-500">事后→事前</div>
+               <div className="text-[7px] md:text-[9px] text-gray-500 uppercase tracking-tighter">驱动模式</div>
+               <div className="text-sm md:text-xl font-black text-yellow-500">事中共创</div>
             </div>
             <div className="text-center">
-               <div className="text-[8px] text-gray-500 uppercase">价值升级</div>
-               <div className="text-lg md:text-2xl font-black text-white">支持→共创</div>
+               <div className="text-[7px] md:text-[9px] text-gray-500 uppercase tracking-tighter">核心指标</div>
+               <div className="text-sm md:text-xl font-black text-white">人力 ROI ↑</div>
             </div>
          </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Card delay="stagger-2">
-          <h4 className="text-yellow-500 font-bold text-[10px] md:text-sm mb-2 flex items-center gap-2 uppercase">
-            <Calendar size={14} /> 常态化列席机制
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
+        <Card delay="stagger-2" className="border-t border-t-yellow-500/20">
+          <h4 className="text-yellow-500 font-bold text-[9px] md:text-xs mb-2 flex items-center gap-1.5 uppercase">
+            <Calendar size={12} /> 路径一：常态化列席机制
           </h4>
-          <p className="text-[9px] md:text-xs text-gray-400 mb-3 leading-snug">固定参加经营会，基于 <span className="text-white">AUM等指标</span> 反向诊断组织问题</p>
-          <div className="p-2 bg-white/5 rounded-lg space-y-1 text-[9px] md:text-xs text-gray-500">
-            <li className="flex gap-2"><span>●</span> 建立固定互动节奏</li>
-            <li className="flex gap-2"><span>●</span> 输出组织诊断报告</li>
-            <div className="pt-1.5 border-t border-white/10 text-[8px] text-yellow-500 font-bold">
-              动作：从&quot;记录者&quot;到&quot;诊断者&quot;
+          <div className="space-y-2">
+            <div>
+               <div className="text-white font-bold text-[8px] md:text-[10px] uppercase mb-0.5">实施方法</div>
+               <p className="text-[8px] md:text-[11px] text-gray-400 leading-snug">固定列席业务经营分析会，基于 <span className="text-white">AUM、转化率</span> 等核心指标反向诊断组织问题</p>
+            </div>
+            <div className="p-2 bg-white/5 rounded-lg space-y-1 text-[8px] md:text-[10px] text-gray-500">
+              <div className="text-white font-bold text-[7px] md:text-[9px] uppercase mb-1">落地标志</div>
+              <li className="flex gap-1.5"><span>●</span> 建立固化互动节奏</li>
+              <li className="flex gap-1.5"><span>●</span> 输出组织健康诊断报告</li>
             </div>
           </div>
         </Card>
 
-        <Card delay="stagger-3">
-          <h4 className="text-[#8b5cf6] font-bold text-[10px] md:text-sm mb-2 flex items-center gap-2 uppercase">
-            <Activity size={14} /> 组织情绪诊断
+        <Card delay="stagger-3" className="border-t border-t-[#8b5cf6]/20">
+          <h4 className="text-[#8b5cf6] font-bold text-[9px] md:text-xs mb-2 flex items-center gap-1.5 uppercase">
+            <Activity size={12} /> 路径二：组织情绪预警
           </h4>
-          <p className="text-[9px] md:text-xs text-gray-400 mb-3 leading-snug">利用AI生成热力图，前置识别员工倦怠与离职风险</p>
-          <div className="p-2 bg-white/5 rounded-lg space-y-1 text-[9px] md:text-xs text-gray-500">
-            <li className="flex gap-2"><span>●</span> 建立健康度预警机制</li>
-            <li className="flex gap-2"><span>●</span> 针对高风险团队输出建议</li>
+          <div className="space-y-2">
+            <div>
+               <div className="text-white font-bold text-[8px] md:text-[10px] uppercase mb-0.5">实施方法</div>
+               <p className="text-[8px] md:text-[11px] text-gray-400 leading-snug">利用 <span className="text-[#8b5cf6]">AI文本分析</span> 员工访谈与反馈，生成情绪热力图，前置识别人才流失风险</p>
+            </div>
+            <div className="p-2 bg-white/5 rounded-lg space-y-1 text-[8px] md:text-[10px] text-gray-500">
+              <div className="text-white font-bold text-[7px] md:text-[9px] uppercase mb-1">落地标志</div>
+              <li className="flex gap-1.5"><span>●</span> 动态情绪预警看板</li>
+              <li className="flex gap-1.5"><span>●</span> 高风险团队干预预案</li>
+            </div>
+          </div>
+        </Card>
+
+        <Card delay="stagger-4" className="border-t border-t-[#3b82f6]/20">
+          <h4 className="text-[#3b82f6] font-bold text-[9px] md:text-xs mb-2 flex items-center gap-1.5 uppercase">
+            <Scale size={12} /> 路径三：人力ROI复盘
+          </h4>
+          <div className="space-y-2">
+            <div>
+               <div className="text-white font-bold text-[8px] md:text-[10px] uppercase mb-0.5">实施方法</div>
+               <p className="text-[8px] md:text-[11px] text-gray-400 leading-snug">利用AI进行历史数据建模，复盘投入产出比，驱动 <span className="text-white font-bold">“线上基本法”</span> 动态迭代</p>
+            </div>
+            <div className="p-2 bg-white/5 rounded-lg space-y-1 text-[8px] md:text-[10px] text-gray-500">
+              <div className="text-white font-bold text-[7px] md:text-[9px] uppercase mb-1">落地标志</div>
+              <li className="flex gap-1.5"><span>●</span> 输出季度人力ROI复盘报告</li>
+              <li className="flex gap-1.5"><span>●</span> 优化线上激励成本模型</li>
+            </div>
           </div>
         </Card>
       </div>
 
-      <div className="mt-4 p-3 glass-card animate-up stagger-4 flex flex-wrap justify-between items-center gap-2">
-         <span className="text-[10px] md:text-sm font-bold text-white uppercase tracking-widest">预期产出：</span>
-         <div className="flex flex-wrap gap-4 text-[8px] md:text-xs text-gray-500">
-            <span>实现&quot;事中共创&quot;</span>
-            <span>可视化预警机制</span>
-            <span>提升实质贡献度</span>
+      <div className="mt-4 p-2.5 glass-card animate-up stagger-4 flex flex-wrap justify-between items-center gap-2 bg-gradient-to-r from-transparent via-white/[0.02] to-transparent">
+         <div className="flex items-center gap-2">
+            <Rocket size={14} className="text-[#3b82f6]" />
+            <span className="text-[9px] md:text-xs font-bold text-white uppercase tracking-widest">预期价值产出</span>
+         </div>
+         <div className="flex gap-4 md:gap-8 text-[8px] md:text-[10px] text-gray-500 font-bold italic">
+            <span>实现从&quot;事后支持&quot;到&quot;价值共创&quot;</span>
+            <span>建立精准化人力投入产出评估机制</span>
+            <span>深度反哺业务激励政策优化</span>
          </div>
       </div>
     </div>
@@ -628,7 +655,7 @@ const Page9 = () => (
             &quot;AI 已来，我们需思考：<br/>
             到底什么才是个人可依赖的不可替代性？&quot;
           </p>
-          <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-bg-dark px-4"><Bot size={24} className="text-[#3b82f6] opacity-50" /></div>
+          <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#0a0a12] px-4"><Bot size={24} className="text-[#3b82f6] opacity-50" /></div>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8 md:mt-12">
