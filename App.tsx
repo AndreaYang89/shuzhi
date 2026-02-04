@@ -21,7 +21,10 @@ import {
   Search,
   MessageSquare,
   BarChart3,
-  Bot
+  Bot,
+  Heart,
+  Fingerprint,
+  Compass
 } from 'lucide-react';
 
 // --- UI Components ---
@@ -610,9 +613,56 @@ const Page8 = () => (
   </section>
 );
 
+const Page9 = () => (
+  <section className="section">
+    <div className="max-w-4xl mx-auto w-full text-center px-4">
+      <SectionHeader 
+        title="结语：AI 时代的自我锚点" 
+        subtitle="在算法驱动的世界，寻找人的确定性"
+        label="REFLECTIONS" 
+      />
+      
+      <div className="mt-8 md:mt-12 space-y-8 md:space-y-12 animate-up stagger-1">
+        <div className="relative inline-block py-6 px-10 border-y border-white/10">
+          <p className="text-xl md:text-3xl font-black text-white italic leading-tight">
+            &quot;AI 已来，我们需思考：<br/>
+            到底什么才是个人可依赖的不可替代性？&quot;
+          </p>
+          <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-bg-dark px-4"><Bot size={24} className="text-[#3b82f6] opacity-50" /></div>
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8 md:mt-12">
+          {[
+            { icon: <Heart size={20} />, title: "深度共情", desc: "情感连接的能力" },
+            { icon: <Compass size={20} />, title: "道德直觉", desc: "复杂情境的抉择" },
+            { icon: <BrainCircuit size={20} />, title: "批判思维", desc: "打破框架的洞察" },
+            { icon: <Fingerprint size={20} />, title: "人格魅力", desc: "驱动变革的影响" }
+          ].map((item, idx) => (
+            <div key={idx} className="flex flex-col items-center animate-up" style={{ animationDelay: `${0.4 + idx * 0.1}s` }}>
+              <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-[#3b82f6] mb-3 border border-white/5 shadow-inner">
+                {item.icon}
+              </div>
+              <div className="text-white font-bold text-xs md:text-sm mb-1">{item.title}</div>
+              <div className="text-[9px] md:text-xs text-gray-500 leading-tight">{item.desc}</div>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-12 md:mt-20 py-6 border-t border-white/5 animate-up stagger-4">
+          <p className="text-sm md:text-xl font-bold tracking-[0.2em] text-transparent bg-clip-text bg-gradient-to-r from-[#3b82f6] via-white to-[#8b5cf6]">
+            拥抱智能 · 守望人性
+          </p>
+          <div className="mt-4 text-[10px] text-gray-600 uppercase tracking-widest font-bold">2026.02 · 正行BU / 人力资源部</div>
+        </div>
+      </div>
+    </div>
+  </section>
+);
+
 const App: React.FC = () => {
   const [activeSection, setActiveSection] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const slideCount = 9;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -638,8 +688,8 @@ const App: React.FC = () => {
   return (
     <div className="relative h-screen w-screen overflow-hidden select-none bg-[#0a0a12]">
       {/* Side Dots */}
-      <div className="fixed right-4 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-6 md:gap-8 pointer-events-auto">
-        {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
+      <div className="fixed right-4 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-5 md:gap-7 pointer-events-auto">
+        {Array.from({ length: slideCount }).map((_, i) => (
           <button
             key={i}
             onClick={() => scrollTo(i)}
@@ -658,7 +708,7 @@ const App: React.FC = () => {
       <div className="fixed top-0 left-0 w-full h-[2px] z-50 md:hidden overflow-hidden">
         <div 
           className="h-full bg-gradient-to-r from-[#3b82f6] to-[#8b5cf6] transition-all duration-500 ease-out" 
-          style={{ width: `${((activeSection + 1) / 8) * 100}%` }}
+          style={{ width: `${((activeSection + 1) / slideCount) * 100}%` }}
         />
       </div>
 
@@ -674,6 +724,7 @@ const App: React.FC = () => {
         <Page6 />
         <Page7 />
         <Page8 />
+        <Page9 />
       </div>
     </div>
   );
